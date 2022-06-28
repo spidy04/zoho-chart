@@ -1,6 +1,6 @@
 <html>
 <head>
-<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js" type="text/javascript"></script>
+<!-- <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js" type="text/javascript"></script>
 <script>
 	function GetURLParameter(sParam) {
 		var sPageURL = window.location.search.substring(1);
@@ -38,11 +38,64 @@
 		// initiate chart display
 		chart.draw();
 	});
-</script>
+</script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<div id="container"></div>
-<!-- 	<canvas id="myChart" width="400" height="400"></canvas> -->
+<!-- <div id="container"></div> -->
+<canvas id="myChart"></canvas>
+	
+<script>
+	function GetURLParameter(sParam) {
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    for (var i = 0; i < sURLVariables.length; i++) 
+	    {
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam) 
+		{
+		    return sParameterName[1];
+		}
+	    }
+	}
+
+        var totalIn = GetURLParameter('totalIn');
+        var totalOut = GetURLParameter('totalOut');
+        var profit = totalIn - totalOut;
+
+        let myChart = document.getElementById('myChart').getContext('2d');
+        const labels = [
+            'January',
+            'February',
+            'March'
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+            label: 'My First dataset',
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+            ],
+            borderColor: 'rgb(255, 255, 255)',
+            data: [totalIn, totalOut, profit],
+            hoverOffset: 10
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: data,
+            options: {}
+        };
+
+        const mChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+</script>
 </body>
 </html>
