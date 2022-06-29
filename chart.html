@@ -39,6 +39,12 @@
 		chart.draw();
 	});
 </script> -->
+	<style>
+	canvas{
+	  width:600px !important;
+	  height:600px !important;
+	}
+	</style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -90,7 +96,17 @@
         const config = {
             type: 'doughnut',
             data: data,
-            options: {}
+            options: {
+	    	responsive: true,
+		    maintainAspectRatio: false,
+		    scales: {
+			yAxes: [{
+			    ticks: {
+				beginAtZero:true
+			    }
+			}]
+	    	}
+	    }
         };
 
         const mChart = new Chart(
